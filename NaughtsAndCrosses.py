@@ -16,48 +16,36 @@ class tree_node:
         #Check for victory on board and give a score to the outcome of the game
 
         if check_winner(self.ai_char,self.board):
-
             return 10
-
         elif check_winner(1-self.ai_char,self.board):
-
             return -10
-
         else:
             
-            #Loop through possilbe moves
-   
+            #Loop through possilbe moves 
             for i in range(0,len(self.board)):
 
                 if self.board[i] == 2:
 
                     #Add a new move
-
                     new_board = copy.deepcopy(self.board)
                     new_board[i] = self.turn_char
 
                     #Create a new node and add it to the tree whilst also constructing it children
                     #Get a score for the baord
-
                     node = tree_node(new_board,self.ai_char,1-self.turn_char)                 
                     self.children[node] = node.generate_children()
 
-            #Access the score of current node
-                
+            #Access the score of current node             
             if len(self.children) != 0:
                 
-                if self.ai_char == self.turn_char:
-                    
+                if self.ai_char == self.turn_char:                   
                     #Our move so pick the best
                     return max(self.children.itervalues())*0.9
-
-                else:
-                    
+                else:                 
                     #Their move so pick the worst  
                     return min(self.children.itervalues())*0.9
-
             else:
-
+                
                 #Draw case so return 0  
                 return 0
 

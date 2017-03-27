@@ -69,11 +69,10 @@ def choose_move(node,ai_char):
     boards = []
     
     #Loop through the child nodes with the "best" score and add them to a "bucket" to choose from
-    if ai_char == 0:
-        for nodes in node.children:
-            if node.children[nodes] == maximum :
-                boards.append(nodes.board)
-
+    for nodes in node.children:
+        if node.children[nodes] == maximum:
+            boards.append(nodes.board)
+    
     #Choose on of the best nodes
     return boards[randint(0,len(boards)-1)]
 
